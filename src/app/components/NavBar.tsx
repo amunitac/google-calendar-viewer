@@ -80,9 +80,9 @@ export default function Navbar({ toggleSideBar, currentDate, navigateWeek }: { t
             </div>
           </>
         ) : (
-          <a href="/api/auth/login" className="flex items-center hover:text-gray-300">
+          <a href="/api/auth/login" className="flex items-center hover:text-gray-300 space-x-1">
+            <p>LogIn</p>
             <FiLogIn size={20} className="mr-1" />
-            Login
           </a>
         )}
       </div>

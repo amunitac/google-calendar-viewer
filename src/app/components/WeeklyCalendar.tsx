@@ -8,6 +8,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import rrulePlugin from '@fullcalendar/rrule';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+import { Calendar as MiniCalendar } from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 interface GoogleEvent {
   id: string;
@@ -25,6 +27,10 @@ interface GoogleEvent {
 
 interface WeeklyCalendarProps {
   events: GoogleEvent[];
+  onDateChange: (newDate: Date) => void;
+  onFilterChange: (filters: string[]) => void;
+  isSidebarVisible: boolean;
+  toggleSidebar: () => void;
 }
 
 export default function WeeklyCalendar({ events }: WeeklyCalendarProps) {
