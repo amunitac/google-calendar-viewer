@@ -18,3 +18,14 @@
 .fc .fc-daygrid-event {
   @apply rounded-lg shadow-sm;
 }
+
+.fc-event-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc-day-today {
+  background-color: #e0f7fa;
+  border: 2px solid #03a9f4;
+}
