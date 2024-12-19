@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Instrucciones para ejecutar el proyecto en local
 
-## Getting Started
+Este proyecto es una aplicación web que integra autenticación con Auth0 y visualización de eventos semanales del calendario de Google.
 
-First, run the development server:
+## Requisitos previos
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. **Node.js**: Asegúrate de tener instalada la versión `v18.20.2` de Node.js.
+2. **Gestor de paquetes**: Confirma que tienes `npm` configurado correctamente (instalado junto con Node.js).
+3. **Archivo de configuración `.env.local`**: Necesitarás un archivo `.env.local` con las siguientes credenciales:
+
+```env
+AUTH0_SECRET=9751bca0e3d6ec4d10552e4e6014552809f8e946c473f8a54718192c00fdeaa6
+AUTH0_BASE_URL=http://localhost:3000
+AUTH0_ISSUER_BASE_URL=https://dev-lijlirssxrtm1358.us.auth0.com
+AUTH0_CLIENT_ID=WpCXdhmk1FnpQU5L8adQxmO0kaJsAVDS
+AUTH0_CLIENT_SECRET=1ndPzItWDalvcoWI80Kods9WQ4VGuCkMgcx1pwrG4FTRbqG_5JU0CmJdCOXr0eG9
+AUTH0_DOMAIN=dev-lijlirssxrtm1358.us.auth0.com
+AUTH0_MANAGEMENT_API_CLIENT_ID=IMO2gT2EbXMudkgJIo2ZxSOu7s5ySZNM
+AUTH0_MANAGEMENT_API_CLIENT_SECRET=Qk01vVFW3SwMUXFC2tgJ05dZ9jgIc1Htn4TOfn4PYZ3-9IA-iNRhVXfi_qoW0ZnZ
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Instalación
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Sigue estos pasos para instalar y ejecutar el proyecto en local:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Clona el repositorio del proyecto:
+   ```bash
+   git clone <URL-del-repositorio>
+   ```
 
-## Learn More
+2. Accede a la carpeta del proyecto:
+   ```bash
+   cd <nombre-del-repositorio>
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. Instala las dependencias necesarias:
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Asegúrate de tener el archivo `.env.local` con la estructura proporcionada en la raíz del proyecto.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Ejecución en desarrollo
 
-## Deploy on Vercel
+Para iniciar el proyecto en modo desarrollo:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Ejecuta el siguiente comando:
+   ```bash
+   npm run dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. Accede a la aplicación en tu navegador en la dirección:
+   ```
+   http://localhost:3000
+   ```
+
+## Construcción y ejecución en producción
+
+Si deseas construir y ejecutar el proyecto en un entorno de producción:
+
+1. Asegúrate de crear un archivo `.env.production` en la raíz del proyecto con las mismas variables que `.env.local`.
+
+2. Construye el proyecto:
+   ```bash
+   npm run build
+   ```
+
+3. Ejecuta la aplicación en modo producción:
+   ```bash
+   npm start
+   ```
+
+## Consideraciones
+
+- Asegúrate de tener configurado correctamente tu entorno con Node.js en la versión indicada.
+- El proyecto utiliza Auth0 para la autenticación y requiere las credenciales proporcionadas en las variables de entorno para funcionar correctamente.
+- Si encuentras problemas o necesitas soporte, revisa los logs generados en la consola para identificar posibles errores.
+
+## Documentación básica
+
+### Resumen de la arquitectura
+Este proyecto utiliza **Next.js** como framework principal para el frontend y backend, integrando **Auth0** para manejar la autenticación de usuarios y la conexión segura con el API de Google Calendar. A continuación, un resumen de cómo interactúan los componentes:
+
+1. **Next.js**: Proporciona tanto las rutas del frontend como las rutas API para conectar con servicios externos.
+   - El frontend muestra una vista semanal del calendario del usuario utilizando componentes como `WeeklyCalendar`.
+   - Las rutas API en Next.js actúan como intermediarios para realizar solicitudes al API de gestión de Auth0 y al API de Google Calendar.
+
+2. **Auth0**:
+   - Gestiona la autenticación de usuarios utilizando OAuth2.
+   - Proporciona tokens de acceso que se utilizan para interactuar con el API de Google Calendar y el API de gestión de usuarios de Auth0.
+
+3. **Google Calendar API**:
+   - Se utiliza para obtener los eventos del calendario del usuario autenticado.
+   - El token de acceso generado por Auth0 incluye los permisos necesarios para acceder al calendario del usuario.
+
+### Decisiones clave
+1. **Elección de Next.js**:
+   - Next.js permite manejar el frontend y backend en un solo entorno, simplificando la estructura del proyecto.
+   - Soporte para renderizado del lado del servidor (SSR) y APIs integradas.
+
+2. **Uso de Auth0**:
+   - Auth0 se eligió por su facilidad de integración y manejo seguro de autenticación.
+   - Permite conectar fácilmente con Google OAuth2 para acceder al calendario del usuario.
+
+3. **Lenguajes y Herramientas**:
+   - **TypeScript**: Para proporcionar tipado estático y mejorar la mantenibilidad del código.
+   - **TailwindCSS**: Para estilizar rápidamente los componentes y mantener un diseño limpio y profesional.
+
+4. **Despliegue en Vercel**:
+   - Vercel fue elegido por su integración nativa con Next.js y su facilidad de configuración para entornos de producción.
+
+## Enlace funcional
+Puedes acceder a la aplicación desplegada en el siguiente enlace:
+
+[Google Calendar Viewer App](https://google-calendar-viewer.vercel.app/)
