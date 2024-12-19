@@ -9,7 +9,7 @@ import rrulePlugin from '@fullcalendar/rrule';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
-interface GoogleEvent {
+export interface GoogleEvent {
   id: string;
   summary: string;
   description?: string;
