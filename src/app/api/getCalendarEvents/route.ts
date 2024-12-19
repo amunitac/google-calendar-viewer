@@ -3,12 +3,17 @@ import { NextResponse } from 'next/server';
 
 export const GET = withApiAuthRequired(async () => {
   try {
+    console.log('GET /api/getCalendarEvents');
+
     const session = await getSession();
+    console.log('Session:', session);
     const user = session?.user;
 
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+
+    console.log('User:', user);
 
     const tokenResponse = await fetch(`${process.env.AUTH0_ISSUER_BASE_URL}/oauth/token`, {
       method: 'POST',
@@ -22,17 +27,24 @@ export const GET = withApiAuthRequired(async () => {
         audience: `${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/`,
     })});
 
+    console.log('Token response:', tokenResponse.status);
+
     if (!tokenResponse.ok) {
-      return NextResponse.json({ error: 'Failed to fetch token' }, { status: tokenResponse.status });
+      const errorDetails = await tokenResponse.json();
+      console.error('Failed to fetch token:', errorDetails);
+      return NextResponse.json({ error: 'Failed to fetch token', details: errorDetails }, { status: tokenResponse.status });
     }
 
     const managementApiToken = (await tokenResponse.json()).access_token;
+    console.log('Management API Token obtained:', managementApiToken);
 
     const response = await fetch(`${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/users/${user.sub}`, {
       headers: {
         Authorization: `Bearer ${managementApiToken}`,
       },
     });
+
+    console.log('User details response status:', response.status);
 
     if (!response.ok) {
       return NextResponse.json({ error: 'Failed to fetch user details' }, { status: response.status });
