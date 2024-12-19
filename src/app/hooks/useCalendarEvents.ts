@@ -1,4 +1,4 @@
-import { GoogleEvent } from "../components/WeeklyCalendar";
+import { GoogleEvent } from '../types';
 
 interface CalendarResponse {
   items: GoogleEvent[];
