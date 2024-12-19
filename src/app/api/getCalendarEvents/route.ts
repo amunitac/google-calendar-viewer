@@ -10,9 +10,27 @@ export const GET = withApiAuthRequired(async () => {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const tokenResponse = await fetch(`${process.env.AUTH0_ISSUER_BASE_URL}/oauth/token`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        grant_type: 'client_credentials',
+        client_id: process.env.AUTH0_MANAGEMENT_API_CLIENT_ID,
+        client_secret: process.env.AUTH0_MANAGEMENT_API_CLIENT_SECRET,
+        audience: `${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/`,
+    })});
+
+    if (!tokenResponse.ok) {
+      return NextResponse.json({ error: 'Failed to fetch token' }, { status: tokenResponse.status });
+    }
+
+    const managementApiToken = (await tokenResponse.json()).access_token;
+
     const response = await fetch(`${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/users/${user.sub}`, {
       headers: {
-        Authorization: `Bearer ${process.env.AUTH0_MANAGEMENT_API_TOKEN}`,
+        Authorization: `Bearer ${managementApiToken}`,
       },
     });
 
