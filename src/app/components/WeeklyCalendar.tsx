@@ -109,15 +109,6 @@ export default function WeeklyCalendar({ events }: WeeklyCalendarProps) {
 
   const renderEventContent = (arg: any) => {
     const { extendedProps } = arg.event;
-    const icons = {
-      birthday: '🎂',
-      recurring: '🔄',
-      allDay: '🌞',
-      meeting: '🕒',
-      task: '📝',
-      private: '🔒',
-      other: '❓',
-    };
 
     return (
       <Tippy
@@ -135,7 +126,7 @@ export default function WeeklyCalendar({ events }: WeeklyCalendarProps) {
         duration={200}
       >
         <div className="transition-transform transform hover:scale-105 p-2 rounded-lg text-ellipsis overflow-hidden whitespace-nowrap">
-          {icons[extendedProps.type]} {arg.event.title}
+          {arg.event.title}
         </div>
       </Tippy>
     )
@@ -154,7 +145,7 @@ export default function WeeklyCalendar({ events }: WeeklyCalendarProps) {
       <div className="flex items-center space-x-4 mb-4">
         <input
           type="text"
-          placeholder="Buscar eventos..."
+          placeholder="Search events..."
           className="border border-gray-300 rounded-md p-2 flex-grow"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -164,13 +155,13 @@ export default function WeeklyCalendar({ events }: WeeklyCalendarProps) {
           value={filter || ''}
           onChange={(e) => setFilter(e.target.value || null)}
         >
-          <option value="">Todos</option>
-          <option value="birthday">Cumpleaños</option>
-          <option value="recurring">Eventos recurrentes</option>
-          <option value="allDay">Eventos de todo el día</option>
-          <option value="meeting">Reuniones</option>
-          <option value="task">Tareas</option>
-          <option value="other">Otros</option>
+          <option value="">All</option>
+          <option value="birthday">Birthday</option>
+          <option value="recurring">Recurring</option>
+          <option value="allDay">All Day</option>
+          <option value="meeting">Meetings</option>
+          <option value="task">Tasks</option>
+          <option value="other">Others</option>
         </select>
       </div>
       <FullCalendar
@@ -179,7 +170,7 @@ export default function WeeklyCalendar({ events }: WeeklyCalendarProps) {
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',
-          right: 'timeGridWeek,timeGridDay',
+          right: ''
         }}
         editable={false}
         selectable={false}
@@ -188,11 +179,8 @@ export default function WeeklyCalendar({ events }: WeeklyCalendarProps) {
         height="auto"
         eventTextColor="#ffffff"
         buttonText={{
-          today: 'Hoy',
-          month: 'Mes',
-          week: 'Semana',
-          day: 'Día',
-          list: 'Agenda',
+          today: 'Today',
+          day: 'Day'
         }}
         allDaySlot={true}
         slotMinTime="06:00:00"
@@ -202,6 +190,7 @@ export default function WeeklyCalendar({ events }: WeeklyCalendarProps) {
             ? 'bg-blue-100 border-blue-500 hover:bg-blue-200'
             : 'hover:bg-gray-100'
         }
+        titleFormat={{ year: 'numeric', month: 'long' }}
       />
     </div>
   );

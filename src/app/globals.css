@@ -2,30 +2,89 @@
 @tailwind components;
 @tailwind utilities;
 
-/* FullCalendar Custom Styles */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 .fc .fc-toolbar-title {
-  @apply text-2xl font-bold text-gray-800;
+  @apply text-2xl font-bold text-black;
 }
 
-.fc .fc-button {
-  @apply bg-indigo-600 text-white hover:bg-indigo-700 rounded-md;
-}
-
-.fc .fc-timegrid-event {
-  @apply rounded-md shadow-md;
+.fc-today-button {
+  @apply bg-gray-200 rounded-full transition-colors duration-200;
 }
 
 .fc .fc-daygrid-event {
   @apply rounded-lg shadow-sm;
 }
 
-.fc-event-title {
+.fc-today-button,
+.fc-prev-button,
+.fc-next-button {
+  @apply bg-gray-200 text-gray-700 rounded-full shadow-md transition-transform duration-200;
+}
+.fc-today-button:hover,
+.fc-prev-button:hover,
+.fc-next-button:hover {
+  @apply bg-gray-300 scale-105 shadow-lg;
+}
+
+.fc .fc-event-title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.fc-day-today {
-  background-color: #e0f7fa;
-  border: 2px solid #03a9f4;
+.fc-scrollgrid {
+  @apply border-collapse table-auto w-full text-sm text-gray-700;
+}
+
+.fc-scrollgrid th,
+.fc-scrollgrid td {
+  @apply border border-gray-300;
+}
+
+.fc-scrollgrid th {
+  @apply from-gray-100 to-gray-200 text-gray-800 font-medium text-center py-2;
+}
+
+.fc-scrollgrid td {
+  @apply bg-white hover:bg-gray-100 transition-colors duration-200;
+}
+
+.fc-scrollgrid .fc-day-today {
+  @apply bg-blue-200 border-2 font-bold;
+}
+
+.fc-scrollgrid .fc-timegrid-axis-cushion {
+  @apply text-gray-500;
+}
+
+.fc-scrollgrid .fc-timegrid-event {
+  @apply rounded-lg shadow-lg text-white font-semibold border border-gray-300 overflow-hidden;
+}
+
+.fc-scrollgrid .fc-timegrid-event:hover {
+  @apply scale-105 shadow-xl transition-transform duration-200 ease-in-out;
+}
+
+.fc-scrollgrid tr:hover {
+  @apply bg-gray-50;
+}
+
+.fc-scrollgrid td:hover {
+  @apply bg-gray-200;
+}
+
+.fc-scrollgrid-container {
+  @apply shadow-md rounded-lg overflow-hidden;
+}
+
+.fc-scrollgrid {
+  @apply border border-gray-300 rounded-lg;
+}
+
+input[type="text"] {
+  @apply border border-gray-300 rounded-lg p-2 shadow-sm focus:ring-2 focus:ring-blue-400 transition-all;
+}
+select {
+  @apply border border-gray-300 rounded-lg p-2 shadow-sm focus:ring-2 focus:ring-blue-400 transition-all;
 }
