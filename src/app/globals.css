@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* FullCalendar Custom Styles */
+.fc .fc-toolbar-title {
+  @apply text-2xl font-bold text-gray-800;
+}
+
+.fc .fc-button {
+  @apply bg-indigo-600 text-white hover:bg-indigo-700 rounded-md;
+}
+
+.fc .fc-timegrid-event {
+  @apply rounded-md shadow-md;
+}
+
+.fc .fc-daygrid-event {
+  @apply rounded-lg shadow-sm;
+}
+
+.fc-event-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc-day-today {
+  background-color: #e0f7fa;
+  border: 2px solid #03a9f4;
+}
