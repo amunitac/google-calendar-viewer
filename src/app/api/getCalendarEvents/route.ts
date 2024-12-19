@@ -29,4 +29,4 @@ export const GET = withApiAuthRequired(async () => {
     console.error(error);
     return NextResponse.json({ error: error.message || 'Internal Server Error' }, { status: 500 });
   }
-});
+}) as any;
