@@ -1,7 +1,8 @@
 import WeeklyCalendar from './WeeklyCalendar';
 import Navbar from './NavBar';
+import { GoogleEvent } from '../types';
 
-const AuthenticatedHome = ({ events }: { events: any[] }) => {
+const AuthenticatedHome = ({ events }: { events: GoogleEvent[] }) => {
   return (
     <div className="min-h-screen bg-gray-100">
       <Navbar />

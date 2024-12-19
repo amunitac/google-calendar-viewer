@@ -4,7 +4,7 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 import { useEffect, useState } from 'react';
 import Navbar from './components/NavBar';
 import Spinner from './components/Spinner';
-import { GoogleEvent } from './components/WeeklyCalendar';
+import { GoogleEvent } from './types';
 import { useRouter } from 'next/navigation';
 import fetchCalendarEvents from './hooks/useCalendarEvents';
 import AuthenticatedHome from './components/AuthenticatedHome';
