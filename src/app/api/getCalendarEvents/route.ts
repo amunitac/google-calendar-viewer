@@ -39,7 +39,7 @@ export const GET = withApiAuthRequired(async () => {
     }
 
     const userDetails = await response.json();
-    const googleIdentity = userDetails?.identities?.find((identity) => identity.provider === 'google-oauth2');
+    const googleIdentity = userDetails?.identities?.find((identity: any) => identity.provider === 'google-oauth2');
 
     if (!googleIdentity.access_token) {
       return NextResponse.json({ error: 'Google access token not found' }, { status: 401 });
